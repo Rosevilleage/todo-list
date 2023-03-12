@@ -44,11 +44,11 @@ export default function Header() {
 			<Nav>
 				<Button>
 					<Icon><i class="fa-regular fa-star"></i></Icon>
-					 <div>중요 목록</div>
+					 <div>Daily to do</div>
 				</Button>
 				<Button>
 				<Icon><i class="fa-regular fa-face-smile"></i></Icon>
-				<div>완료됨</div>
+				<div>Completed</div>
 				</Button>
 			</Nav>
 		</HeaderContainer>
