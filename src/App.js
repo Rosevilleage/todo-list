@@ -8,7 +8,7 @@ import { useState } from 'react';
 const TopContainer = styled.div`
   width: 90%;
   height: 90%;
-  border: 2px solid black;
+  border: 2px solid #7c8087;
   border-radius: 10px;
   overflow: hidden;
   display: flex;
