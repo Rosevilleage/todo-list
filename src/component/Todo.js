@@ -1,3 +1,4 @@
+import { useState } from "react"
 import styled from "styled-components"
 
 const Container=styled.div`
@@ -41,6 +42,8 @@ height: 1.5rem;
 `
 
 export default function Todo({text}) {
+const [daily, setDaily] = useState(false);
+
 	return (
 		<Container>
 			<div className="left">
@@ -48,7 +51,7 @@ export default function Todo({text}) {
 				<p>{text}</p>
 			</div>
 			<div className="right">
-				<i class={important?"fa-solid fa-star":"fa-regular fa-star"} onClick={()=>setImportant(!mportant)}></i>
+				<i class={daily?"fa-solid fa-star":"fa-regular fa-star"} onClick={()=>setDaily(!daily)}></i>
 			</div>
 		</Container>
 	)
