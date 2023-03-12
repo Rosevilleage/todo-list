@@ -48,7 +48,7 @@ export default function Todo({text}) {
 				<p>{text}</p>
 			</div>
 			<div className="right">
-				<i class="fa-regular fa-star"></i>
+				<i class={important?"fa-solid fa-star":"fa-regular fa-star"} onClick={()=>setImportant(!mportant)}></i>
 			</div>
 		</Container>
 	)
