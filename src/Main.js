@@ -11,11 +11,11 @@ const MainContainer = styled.main`
 	background-size: cover;
 `
 
-export default function Main() {
+export default function Main({todos, setTodos}) {
 	return (
 		<MainContainer>
 				<TodoHreader />
-				<TodoList />
+				<TodoList todos={todos} setTodos={setTodos}/>
 		</MainContainer>
 	)
 }
