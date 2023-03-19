@@ -16,6 +16,8 @@ const TopContainer = styled.div`
 
 function App() {
   const [todos, setTodos] = useState(dumyData);
+  // console.log(typeof todos)
+  // console.log(todos.filter(x=>x.id===0)[0])
 
   return (
     <div className="App">

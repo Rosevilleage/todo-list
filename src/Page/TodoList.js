@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { dumyData } from "../dumydata";
-import Todo from "./Todo";
+import Todo from "../component/Todo";
 
 const TodoContainer = styled.div`
 	margin: 0 40px;
@@ -15,7 +15,7 @@ const Inputform=styled.div`
 	height: 50px;
 	text-align: left;
 	display: flex;
-	justify-content: ${(props)=>props.id!=='wirte'?'space-between':'start'};
+	justify-content: ${(props)=>props.id==='wirte'?'space-between':'start'};
 	align-items: center;
 	background-color: rgba(255, 255, 255, 0.75);
 	font-weight: 600;
@@ -73,12 +73,12 @@ function TodoInput({handleAddForm, todos, setTodos}) {
 				onChange={handleChange}
 				onKeyUp={(e)=>{
 					if(e.key==='Enter'){
-					setTodos([...todos,{id:todos.length+1, text:newText}])
+					setTodos([...todos,{id:todos.length+1, text:newText, done:false, daily:false}])
 					handleAddForm()}}}
 				></Input>
 			<AddButton 
 				onClick={()=>{
-					setTodos([...todos,{id:todos.length+1, text:newText}])
+					setTodos([...todos,{id:todos.length+1, text:newText, done:false, daily:false}])
 					handleAddForm()
 				}
 				}
@@ -95,14 +95,27 @@ export default function TodoList({todos, setTodos}) {
 	const handleAddForm=()=>{
 		setIsAdd(!isAdd);
 	}
+
+	const handleDone = (id) => {
+		const target=todos.filter(e=>e.id===id)[0]
+		const change=!target.done
+		setTodos([...todos.slice(0,id), {...target, done: change}, ...todos.slice(id+1)])
+	}
+
+	const handleDaily = (id) => {
+		const target=todos.filter(e=>e.id===id)[0]
+		const change=!target.daily
+		setTodos([...todos.slice(0,id), {...target, daily: change}, ...todos.slice(id+1)])
+	}
+	
 	return (
 		<TodoContainer>
 			<div>
-				{todos.map(x=><Todo key={x.id} text={x.text} />)}
+				{todos.map(x=><Todo key={x.id} data={x} handleDaily={handleDaily} handleDone={handleDone}/>)}
 			</div>
 			<div>
-				<Inputform id={!isAdd?'':'wirte'}>
-					{!isAdd?<TodoInput handleAddForm={handleAddForm} todos={todos} setTodos={setTodos}/>:<AddTask handleAddForm={handleAddForm}/>}
+				<Inputform id={isAdd?'wirte':''}>
+					{isAdd?<TodoInput handleAddForm={handleAddForm} todos={todos} setTodos={setTodos}/>:<AddTask handleAddForm={handleAddForm}/>}
 				</Inputform>
 			</div>
 		</TodoContainer>

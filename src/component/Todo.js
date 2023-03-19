@@ -41,17 +41,17 @@ height: 1.5rem;
 }
 `
 
-export default function Todo({text}) {
-const [daily, setDaily] = useState(false);
+export default function Todo({data, handleDaily, handleDone}) {
+	console.log(data.done)
 
 	return (
 		<Container>
 			<div className="left">
-				<CheckBox type="checkbox"/>
-				<p>{text}</p>
+				<CheckBox type="checkbox" checked={data.done} onClick={()=>handleDone(data.id)}/>
+				<p>{data.text}</p>
 			</div>
 			<div className="right">
-				<i class={daily?"fa-solid fa-star":"fa-regular fa-star"} onClick={()=>setDaily(!daily)}></i>
+				<i class={data.daily?"fa-solid fa-star":"fa-regular fa-star"} onClick={()=>handleDaily(data.id)}></i>
 			</div>
 		</Container>
 	)

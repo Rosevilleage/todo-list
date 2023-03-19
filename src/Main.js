@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import TodoHreader from './component/TodoHeader'
-import TodoList from "./component/TodoList";
+import TodoList from "./Page/TodoList";
 import image from './background.png'
 
 const MainContainer = styled.main`
