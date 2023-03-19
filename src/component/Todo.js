@@ -47,7 +47,6 @@ const Container=styled.div`
 	}
 
 	>.delete {
-		transform: ease-in;
 		font-size: 1.1rem;
 		margin-right: 10px;
 		>i {
@@ -63,7 +62,7 @@ border-radius: 50%;
 width: 1.5rem;
 height: 1.5rem;
 
-&:checked {
+&.checked {
 	border-color: transparent;
 	background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M5.707 7.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4a1 1 0 0 0-1.414-1.414L7 8.586 5.707 7.293z'/%3e%3c/svg%3e");
 	background-size: 100% 100%;
@@ -74,12 +73,11 @@ height: 1.5rem;
 `
 
 export default function Todo({data, handleDaily, handleDone, choice, handleDelete}) {
-	console.log(rotate)
 
 	return (
 		<Container>
 			<div className="left">
-				<CheckBox type="checkbox" checked={data.done} onClick={()=>handleDone(data.id)}/>
+				<CheckBox type="checkbox" className={data.done?"checked":''} onClick={()=>handleDone(data.id)}/>
 				<p>{data.text}</p>
 			</div>
 			{!choice?<div className="right">

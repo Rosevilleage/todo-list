@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { dumyData } from "../dumydata";
 import Todo from "../component/Todo";
@@ -64,14 +64,18 @@ const AddButton=styled.button`
 
 function TodoInput({handleAddForm, todos, setTodos}) {
 	const [newText, setnewText] = useState('')
-
+	const inputRef = useRef(null);
 	const handleChange=(e)=>{
 		setnewText(e.target.value);
 	}
-
+	useEffect(()=>{
+		inputRef.current.focus();
+	},[])
+	console.log(inputRef.current)
 	return (
 		<>
-			<Input 
+			<Input
+				ref={inputRef} 
 				type='text'
 				value={newText}
 				onChange={handleChange}
