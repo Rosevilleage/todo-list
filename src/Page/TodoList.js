@@ -71,7 +71,7 @@ function TodoInput({handleAddForm, todos, setTodos}) {
 	useEffect(()=>{
 		inputRef.current.focus();
 	},[])
-	console.log(inputRef.current)
+	
 	return (
 		<>
 			<Input
@@ -122,11 +122,7 @@ export default function TodoList({todos, setTodos, choice}) {
 	}
 
 	const handleDelete = (id) => {
-		if(todos.length===1) {
-			setTodos([])
-		} else { 
-			setTodos([...todos.slice(0,id), ...todos.slice(id+1)])
-		}
+		setTodos([...todos.filter(todo=>todo.id!==id)])
 	}
 	
 	return (
