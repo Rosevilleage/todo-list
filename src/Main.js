@@ -2,6 +2,7 @@ import styled from "styled-components";
 import TodoHreader from './component/TodoHeader'
 import TodoList from "./Page/TodoList";
 import image from './background.png'
+import { useState } from "react";
 
 const MainContainer = styled.main`
 	height: 100%;
@@ -12,10 +13,15 @@ const MainContainer = styled.main`
 `
 
 export default function Main({todos, setTodos}) {
+	const [choice, setChoie] = useState(false);
+	const handleChoice=()=>{
+		setChoie(!choice);
+	}
+
 	return (
 		<MainContainer>
-				<TodoHreader />
-				<TodoList todos={todos} setTodos={setTodos}/>
+				<TodoHreader handleChoice={handleChoice}/>
+				<TodoList todos={todos} setTodos={setTodos} choice={choice}/>
 		</MainContainer>
 	)
 }

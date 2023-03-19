@@ -8,7 +8,11 @@ const TodoContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	height: calc(100% - 154px); 
+	height: calc(100% - 154px);
+	flex-wrap: row;
+	>.list {
+		overflow-y: scroll;
+	}
 `
 const Inputform=styled.div`
 	border-radius: 13px;
@@ -73,8 +77,13 @@ function TodoInput({handleAddForm, todos, setTodos}) {
 				onChange={handleChange}
 				onKeyUp={(e)=>{
 					if(e.key==='Enter'){
-					setTodos([...todos,{id:todos.length+1, text:newText, done:false, daily:false}])
-					handleAddForm()}}}
+						setTodos([...todos,{id:todos.length+1, text:newText, done:false, daily:false}])
+						handleAddForm()}
+					if(e.key==='Escape') {
+						setnewText('')
+						handleAddForm()
+					}
+				}}
 				></Input>
 			<AddButton 
 				onClick={()=>{
@@ -89,7 +98,7 @@ function TodoInput({handleAddForm, todos, setTodos}) {
 	)
 }
 
-export default function TodoList({todos, setTodos}) {
+export default function TodoList({todos, setTodos, choice}) {
 	const [isAdd, setIsAdd] = useState(false);
 
 	const handleAddForm=()=>{
@@ -107,11 +116,19 @@ export default function TodoList({todos, setTodos}) {
 		const change=!target.daily
 		setTodos([...todos.slice(0,id), {...target, daily: change}, ...todos.slice(id+1)])
 	}
+
+	const handleDelete = (id) => {
+		if(todos.length===1) {
+			setTodos([])
+		} else { 
+			setTodos([...todos.slice(0,id), ...todos.slice(id+1)])
+		}
+	}
 	
 	return (
 		<TodoContainer>
-			<div>
-				{todos.map(x=><Todo key={x.id} data={x} handleDaily={handleDaily} handleDone={handleDone}/>)}
+			<div className="list">
+				{todos.map(x=><Todo key={x.id} data={x} handleDaily={handleDaily} handleDone={handleDone} choice={choice} setTodos={setTodos} handleDelete={handleDelete}/>)}
 			</div>
 			<div>
 				<Inputform id={isAdd?'wirte':''}>

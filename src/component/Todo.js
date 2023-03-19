@@ -1,5 +1,26 @@
 import { useState } from "react"
-import styled from "styled-components"
+import styled, {keyframes} from "styled-components"
+
+const rotate=keyframes`
+from{
+	transform: rotate(0)
+}
+20%{
+	transform: rotate(-20deg)
+}
+40%{
+	transform: rotate(20deg)
+}
+60%{
+	transform: rotate(-10deg)
+}
+80%{
+	transform: rotate(10deg)
+}
+to{
+	transform: rotate(-5deg)
+}
+`
 
 const Container=styled.div`
 	display: flex;
@@ -16,11 +37,22 @@ const Container=styled.div`
 	}
 	>.left > p {
 		margin-left: 10px;
+		text-align: left;
+		word-break:break-all;
 	}
 
 	>.right {
 		margin-right: 10px;
 		color: rgb(95, 95, 95);
+	}
+
+	>.delete {
+		transform: ease-in;
+		font-size: 1.1rem;
+		margin-right: 10px;
+		>i {
+			animation: ${rotate} 1s linear infinite;
+		}
 	}
 `
 
@@ -41,8 +73,8 @@ height: 1.5rem;
 }
 `
 
-export default function Todo({data, handleDaily, handleDone}) {
-	console.log(data.done)
+export default function Todo({data, handleDaily, handleDone, choice, handleDelete}) {
+	console.log(rotate)
 
 	return (
 		<Container>
@@ -50,9 +82,12 @@ export default function Todo({data, handleDaily, handleDone}) {
 				<CheckBox type="checkbox" checked={data.done} onClick={()=>handleDone(data.id)}/>
 				<p>{data.text}</p>
 			</div>
-			<div className="right">
+			{!choice?<div className="right">
 				<i class={data.daily?"fa-solid fa-star":"fa-regular fa-star"} onClick={()=>handleDaily(data.id)}></i>
+			</div>:<div className="delete">
+				<i class="fa-regular fa-trash-can" onClick={()=>handleDelete(data.id)}></i>
 			</div>
+			}
 		</Container>
 	)
 }

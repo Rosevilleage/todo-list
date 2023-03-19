@@ -31,7 +31,7 @@ const Delete= styled.button`
 	background-color: rgba(255, 255, 255, 0.7);
 `
 
-export default function TodoHreader() {
+export default function TodoHreader({handleChoice}) {
 	return (
 		<>
 			<TodoHead>
@@ -40,7 +40,7 @@ export default function TodoHreader() {
 					<span className="date">Saturday, March 11th</span>
 				</Title>
 				<Delete>
-				<i class="fa-regular fa-trash-can"></i>
+				<i class="fa-regular fa-trash-can" onClick={handleChoice}></i>
 				</Delete>
 			</TodoHead>
 		</>
