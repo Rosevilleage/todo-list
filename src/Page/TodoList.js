@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import { dumyData } from "../dumydata";
 import Todo from "../component/Todo";
+import axios from "axios";
 
 const TodoContainer = styled.div`
 	margin: 0 40px;
@@ -71,7 +71,17 @@ function TodoInput({handleAddForm, todos, setTodos}) {
 	useEffect(()=>{
 		inputRef.current.focus();
 	},[])
-	
+	const handleSubmit=()=>{
+		axios.post('http://localhost:4000/addTodo', {
+			text: newText,
+			daily: false,
+			done: false
+		})
+		.then(res=>{
+			setnewText('');
+			handleAddForm();
+		})
+	}
 	return (
 		<>
 			<Input
@@ -81,8 +91,10 @@ function TodoInput({handleAddForm, todos, setTodos}) {
 				onChange={handleChange}
 				onKeyUp={(e)=>{
 					if(e.key==='Enter'){
-						setTodos([...todos,{id:todos.length+1, text:newText, done:false, daily:false}])
-						handleAddForm()}
+						// setTodos([...todos,{id:todos.length+1, text:newText, done:false, daily:false}])
+						handleAddForm()
+						handleSubmit();
+					}
 					if(e.key==='Escape') {
 						setnewText('')
 						handleAddForm()
@@ -91,7 +103,8 @@ function TodoInput({handleAddForm, todos, setTodos}) {
 				></Input>
 			<AddButton 
 				onClick={()=>{
-					setTodos([...todos,{id:todos.length+1, text:newText, done:false, daily:false}])
+					// setTodos([...todos,{id:todos.length+1, text:newText, done:false, daily:false}])
+					handleSubmit();
 					handleAddForm()
 				}
 				}

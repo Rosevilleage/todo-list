@@ -1,6 +1,7 @@
 
 import styled from "styled-components";
-import UserInfo from "./component/UserInfo";
+import UserInfo from "../component/UserInfo";
+import { NavLink } from "react-router-dom";
 
 const HeaderContainer = styled.header`
 	height: 100%;
@@ -42,14 +43,24 @@ export default function Header() {
 			<UserInfo/>
 			<div className="line"><p>day</p></div>
 			<Nav>
-				<Button>
-					<Icon><i class="fa-regular fa-star"></i></Icon>
-					 <div>Daily to do</div>
-				</Button>
-				<Button>
-				<Icon><i class="fa-regular fa-face-smile"></i></Icon>
-				<div>Completed</div>
-				</Button>
+				<NavLink to={'/'}>
+					<Button>
+						<Icon><i class="fa-solid fa-house"></i></Icon>
+						<div>All</div>
+					</Button>
+				</NavLink>
+				<NavLink to={'/daily'}>
+					<Button>
+						<Icon><i class="fa-regular fa-star"></i></Icon>
+						<div>Daily to do</div>
+					</Button>
+				</NavLink>
+				<NavLink to={'/done'}>
+					<Button>
+					<Icon><i class="fa-regular fa-face-smile"></i></Icon>
+					<div>Completed</div>
+					</Button>
+				</NavLink>
 			</Nav>
 		</HeaderContainer>
 	)

@@ -1,3 +1,4 @@
+import { useMemo } from "react"
 import styled from "styled-components"
 
 const TodoHead = styled.div`
@@ -35,12 +36,22 @@ const Delete= styled.button`
 	}
 `
 
-export default function TodoHreader({handleChoice}) {
+export default function TodoHreader({handleChoice, location}) {
+	let title = useMemo(()=>{
+		switch(location) {		
+			case '/daily' :
+				return 'Daily To Do'
+			case '/done' :
+				return 'Completed To Do'
+			default :
+				return 'My Day'
+		}
+	}, [location])
 	return (
 		<>
 			<TodoHead>
 				<Title>
-					<span className="title">My Day</span>
+					<span className="title">{title}</span>
 					<span className="date">Saturday, March 11th</span>
 				</Title>
 				<Delete onClick={handleChoice}>
