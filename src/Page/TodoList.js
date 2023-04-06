@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import Todo from "../component/Todo";
 import axios from "axios";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const TodoContainer = styled.div`
 	margin: 0 40px;
@@ -65,6 +66,7 @@ const AddButton=styled.button`
 function TodoInput({handleAddForm, todos, setTodos}) {
 	const [newText, setnewText] = useState('')
 	const inputRef = useRef(null);
+	const navigation = useNavigate()
 	const handleChange=(e)=>{
 		setnewText(e.target.value);
 	}
@@ -80,6 +82,7 @@ function TodoInput({handleAddForm, todos, setTodos}) {
 		.then(res=>{
 			setnewText('');
 			handleAddForm();
+			navigation(0)
 		})
 	}
 	return (
@@ -115,7 +118,7 @@ function TodoInput({handleAddForm, todos, setTodos}) {
 	)
 }
 
-export default function TodoList({todos, setTodos, choice}) {
+export default function TodoList({todos, setTodos, choice, handleChange}) {
 	const [isAdd, setIsAdd] = useState(false);
 
 	const handleAddForm=()=>{
@@ -123,19 +126,34 @@ export default function TodoList({todos, setTodos, choice}) {
 	}
 
 	const handleDone = (id) => {
-		const target=todos.filter(e=>e.id===id)[0]
-		const change=!target.done
-		setTodos([...todos.slice(0,id), {...target, done: change}, ...todos.slice(id+1)])
+		// const target=todos.filter(e=>e.id===id)[0]
+		// const change=!target.done
+		// setTodos([...todos.slice(0,id), {...target, done: change}, ...todos.slice(id+1)])
+		axios.post('http://localhost:4000/done', {id})
+		.then(res=>{
+			console.log('ok')
+			handleChange()
+		})
 	}
 
 	const handleDaily = (id) => {
-		const target=todos.filter(e=>e.id===id)[0]
-		const change=!target.daily
-		setTodos([...todos.slice(0,id), {...target, daily: change}, ...todos.slice(id+1)])
+		// const target=todos.filter(e=>e.id===id)[0]
+		// const change=!target.daily
+		// setTodos([...todos.slice(0,id), {...target, daily: change}, ...todos.slice(id+1)])
+		axios.post('http://localhost:4000/daily', {id})
+		.then(res=>{
+			console.log('ok')
+			handleChange()
+		})
 	}
 
 	const handleDelete = (id) => {
-		setTodos([...todos.filter(todo=>todo.id!==id)])
+		// setTodos([...todos.filter(todo=>todo.id!==id)])
+		axios.post('http://localhost:4000/delete', {id})
+		.then(res=>{
+			handleChange()
+		})
+		.catch(e=>console.error(e.message))
 	}
 	
 	return (

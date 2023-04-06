@@ -9,7 +9,7 @@ const HeaderContainer = styled.header`
 	>.line {
 		height:35px;
 		width: calc(100% - 5px);
-		background-color: rgba(125, 125, 125, 0.25);
+		background-color: rgba(49, 49, 49, 0.25);
 		border-radius: 0 5px 5px 0;
 		display: flex;
 		align-items: center;
@@ -24,43 +24,54 @@ const Nav = styled.nav`
 `
 const Button=styled.div`
 	height: 50px;
-	font-size: 1.2rem;
 	display: flex;
-	justify-content: center;
+	justify-content: start;
 	align-items: center;
 	position: relative;
 `
 
 const Icon=styled.div`
 font-size: 1.5rem;
-position: absolute;
-left: 0;
+margin-right: 1rem;
+
+`
+const NavStyle=styled(NavLink)`
+font-size: 1.5rem;
+align-text: start;
+font-weight: 450;
+&:link {
+	transition : 0.5s;
+	text-decoration: none;
+}
+&:visited {
+	color: black;
+}
 `
 
 export default function Header() {
 	return (
 		<HeaderContainer>
 			<UserInfo/>
-			<div className="line"><p>day</p></div>
+			<div className="line"></div>
 			<Nav>
-				<NavLink to={'/'}>
+				<NavStyle to={'/'} active>
 					<Button>
 						<Icon><i class="fa-solid fa-house"></i></Icon>
 						<div>All</div>
 					</Button>
-				</NavLink>
-				<NavLink to={'/daily'}>
+				</NavStyle>
+				<NavStyle to={'/daily'}>
 					<Button>
 						<Icon><i class="fa-regular fa-star"></i></Icon>
 						<div>Daily to do</div>
 					</Button>
-				</NavLink>
-				<NavLink to={'/done'}>
+				</NavStyle>
+				<NavStyle to={'/done'}>
 					<Button>
 					<Icon><i class="fa-regular fa-face-smile"></i></Icon>
 					<div>Completed</div>
 					</Button>
-				</NavLink>
+				</NavStyle>
 			</Nav>
 		</HeaderContainer>
 	)
