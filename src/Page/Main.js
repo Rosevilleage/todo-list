@@ -25,9 +25,11 @@ export default function Main() {
 	const handleChange=()=>{
 		setChange(!change);
 	}
+	
 	const location = useLocation()
+
 	useEffect(()=>{
-		console.log(location)
+		// console.log(location)
 		axios.get(`http://localhost:4000${location.pathname}`)
 		.then(data=>setTodos(data.data))
 		.catch(e=>console.error(e.message))
@@ -35,7 +37,7 @@ export default function Main() {
 
 	return (
 		<MainContainer>
-				<TodoHreader handleChoice={handleChoice} location={location.pathname}/>
+				<TodoHreader choice={choice} handleChoice={handleChoice} location={location.pathname}/>
 				<TodoList todos={todos} setTodos={setTodos} choice={choice} handleChange={handleChange}/>
 		</MainContainer>
 	)

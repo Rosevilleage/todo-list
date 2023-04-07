@@ -63,10 +63,9 @@ const AddButton=styled.button`
 	)
 }
 
-function TodoInput({handleAddForm, todos, setTodos}) {
+function TodoInput({handleAddForm, todos, setTodos, handleLoad}) {
 	const [newText, setnewText] = useState('')
 	const inputRef = useRef(null);
-	const navigation = useNavigate()
 	const handleChange=(e)=>{
 		setnewText(e.target.value);
 	}
@@ -82,7 +81,7 @@ function TodoInput({handleAddForm, todos, setTodos}) {
 		.then(res=>{
 			setnewText('');
 			handleAddForm();
-			navigation(0)
+			handleLoad()
 		})
 	}
 	return (
@@ -163,7 +162,7 @@ export default function TodoList({todos, setTodos, choice, handleChange}) {
 			</div>
 			<div>
 				<Inputform id={isAdd?'wirte':''}>
-					{isAdd?<TodoInput handleAddForm={handleAddForm} todos={todos} setTodos={setTodos}/>:<AddTask handleAddForm={handleAddForm}/>}
+					{isAdd?<TodoInput handleAddForm={handleAddForm} todos={todos} setTodos={setTodos} handleLoad={handleChange}/>:<AddTask handleAddForm={handleAddForm}/>}
 				</Inputform>
 			</div>
 		</TodoContainer>
