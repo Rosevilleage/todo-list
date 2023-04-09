@@ -54,7 +54,7 @@ export default function Header() {
 			<UserInfo/>
 			<div className="line"></div>
 			<Nav>
-				<NavStyle to={'/'} active>
+				<NavStyle to={'/'}>
 					<Button>
 						<Icon><i class="fa-solid fa-house"></i></Icon>
 						<div>All</div>

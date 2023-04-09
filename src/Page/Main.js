@@ -1,11 +1,12 @@
 import styled from "styled-components";
 import TodoHreader from '../component/TodoHeader'
-import TodoList from "./TodoList";
+import TodoList from "../component/TodoList";
 import image from './../mainimg.png'
-import { useState } from "react";
 import { useEffect } from "react";
 import axios from 'axios';
 import { useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { fill } from "../store/store";
 
 const MainContainer = styled.main`
 	height: 100%;
@@ -16,29 +17,21 @@ const MainContainer = styled.main`
 `
 
 export default function Main() {
-	const [choice, setChoie] = useState(false);
-	const [todos, setTodos] = useState([]);
-	const [change, setChange] = useState(false);
-	const handleChoice=()=>{
-		setChoie(!choice);
-	}
-	const handleChange=()=>{
-		setChange(!change);
-	}
+	const todos = useSelector(state=>state.todo.value)
+	const load = useSelector(state=>state.load.value);
+	const dispatch = useDispatch()
 	
 	const location = useLocation()
-
 	useEffect(()=>{
-		// console.log(location)
 		axios.get(`http://localhost:4000${location.pathname}`)
-		.then(data=>setTodos(data.data))
+		.then(data=>dispatch(fill(data.data)))
 		.catch(e=>console.error(e.message))
-	},[location.pathname, change])
+	},[location.pathname, load])
 
 	return (
 		<MainContainer>
-				<TodoHreader choice={choice} handleChoice={handleChoice} location={location.pathname}/>
-				<TodoList todos={todos} setTodos={setTodos} choice={choice} handleChange={handleChange}/>
+				<TodoHreader pathname={location.pathname}/>
+				<TodoList />
 		</MainContainer>
 	)
 }

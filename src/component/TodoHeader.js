@@ -1,5 +1,7 @@
-import { useEffect, useMemo, useState } from "react"
+import { useMemo } from "react"
+import { useDispatch, useSelector } from "react-redux"
 import styled from "styled-components"
+import {deleteTrigger} from './../store/store'
 
 const TodoHead = styled.div`
 	margin: 30px 40px 10px 40px;
@@ -39,10 +41,11 @@ const Delete= styled.button`
 	}
 `
 
-export default function TodoHreader({choice,handleChoice, location}) {
-	
+export default function TodoHreader({pathname}) {
+	const isDelete = useSelector(state=>state.isDelete.value);
+	const dispatch = useDispatch()
 	let title = useMemo(()=>{
-		switch(location) {		
+		switch(pathname) {		
 			case '/daily' :
 				return 'Daily To Do'
 			case '/done' :
@@ -50,8 +53,7 @@ export default function TodoHreader({choice,handleChoice, location}) {
 			default :
 				return 'My Day'
 		}
-	}, [location])
-
+	}, [pathname])
 	return (
 		<>
 			<TodoHead>
@@ -59,8 +61,8 @@ export default function TodoHreader({choice,handleChoice, location}) {
 					<span className="title">{title}</span>
 					<span className="date">Saturday, March 11th</span>
 				</Title>
-				<Delete onClick={handleChoice}>
-				<i class={choice?"fa-regular fa-star":"fa-regular fa-trash-can"}></i>
+				<Delete onClick={()=>dispatch(deleteTrigger(!isDelete))}>
+				<i class={isDelete?"fa-regular fa-star":"fa-regular fa-trash-can"}></i>
 				</Delete>
 			</TodoHead>
 		</>

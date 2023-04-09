@@ -1,5 +1,6 @@
-import { useState } from "react"
+import { useSelector } from "react-redux"
 import styled, {keyframes} from "styled-components"
+import usePost from "../hooks/usePost"
 
 const rotate=keyframes`
 from{
@@ -72,18 +73,19 @@ height: 1.5rem;
 }
 `
 
-export default function Todo({data, handleDaily, handleDone, choice, handleDelete}) {
-
+export default function Todo({data}) {
+	const isDelete = useSelector(state=>state.isDelete.value)
+	const post=usePost()
 	return (
 		<Container>
 			<div className="left">
-				<CheckBox type="checkbox" className={data.done?"checked":''} onClick={()=>handleDone(data.id)}/>
+				<CheckBox type="checkbox" className={data.done?"checked":''} onClick={()=>post('done',data.id)}/>
 				<p>{data.text}</p>
 			</div>
-			{!choice?<div className="right">
-				<i class={data.daily?"fa-solid fa-star":"fa-regular fa-star"} onClick={()=>handleDaily(data.id)}></i>
+			{!isDelete?<div className="right">
+				<i class={data.daily?"fa-solid fa-star":"fa-regular fa-star"} onClick={()=>post('daily',data.id)}></i>
 			</div>:<div className="delete">
-				<i class="fa-regular fa-trash-can" onClick={()=>handleDelete(data.id)}></i>
+				<i class="fa-regular fa-trash-can" onClick={()=>post('delete',data.id)}></i>
 			</div>
 			}
 		</Container>
