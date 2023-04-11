@@ -2,6 +2,8 @@
 import styled from "styled-components";
 import UserInfo from "../component/UserInfo";
 import { NavLink } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCalendar } from "@fortawesome/free-regular-svg-icons";
 
 const HeaderContainer = styled.header`
 	height: 100%;
@@ -70,6 +72,12 @@ export default function Header() {
 					<Button>
 					<Icon><i class="fa-regular fa-face-smile"></i></Icon>
 					<div>Completed</div>
+					</Button>
+				</NavStyle>
+				<NavStyle to={'/calendar'}>
+					<Button>
+					<Icon><FontAwesomeIcon icon={faCalendar} /></Icon>
+					<div>Calendar</div>
 					</Button>
 				</NavStyle>
 			</Nav>
