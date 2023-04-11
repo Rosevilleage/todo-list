@@ -31,28 +31,33 @@ const Container=styled.div`
 	margin-bottom: 4px;
 	background-color: rgba(255, 255, 255, 0.75);
 	font-weight: 500;
-	>.left {
-		display: flex;
-		align-items: center;
-		margin-left: 10px;
-	}
-	>.left > p {
+`
+
+const Left = styled.div`
+	display: flex;
+	align-items: center;
+	margin-left: 10px;
+	> p {
 		margin-left: 10px;
 		text-align: left;
 		word-break:break-all;
 	}
-
-	>.right {
-		margin-right: 10px;
-		color: rgb(95, 95, 95);
+	>.is-done {
+		color: gray;
+		text-decoration: line-through;
 	}
+`
 
-	>.delete {
-		font-size: 1.1rem;
-		margin-right: 10px;
-		>i {
-			animation: ${rotate} 1s linear infinite;
-		}
+const Right = styled.div`
+	margin-right: 10px;
+	color: rgb(95, 95, 95);
+`
+
+const DeleteBnt = styled.div`
+	font-size: 1.1rem;
+	margin-right: 10px;
+	>i {
+		animation: ${rotate} 1s linear infinite;
 	}
 `
 
@@ -78,15 +83,15 @@ export default function Todo({data}) {
 	const post=usePost()
 	return (
 		<Container>
-			<div className="left">
+			<Left>
 				<CheckBox type="checkbox" className={data.done?"checked":''} onClick={()=>post('done',data.id)}/>
-				<p>{data.text}</p>
-			</div>
-			{!isDelete?<div className="right">
+				<p className={data.done&&'is-done'}>{data.text}</p>
+			</Left>
+			{!isDelete?<Right>
 				<i class={data.daily?"fa-solid fa-star":"fa-regular fa-star"} onClick={()=>post('daily',data.id)}></i>
-			</div>:<div className="delete">
+			</Right>:<DeleteBnt>
 				<i class="fa-regular fa-trash-can" onClick={()=>post('delete',data.id)}></i>
-			</div>
+			</DeleteBnt>
 			}
 		</Container>
 	)
