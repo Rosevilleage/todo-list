@@ -1,33 +1,23 @@
 import styled from "styled-components"
 import CalendarHead from "../component/calendar/CalendarHead"
-import { addMonths, subMonths } from "date-fns"
 import CalendarDays from "../component/calendar/CalendarDays"
 import CalenderBoard from '../component/calendar/CalendarBoard'
-import { useState } from "react"
 
 const Container = styled.div`
-	border: 1px solid red;
+	height: 100%;
 	flex-basis: 80%;
+	border-radius: 9px 6px 6px 9px;
+	background-color: rgb(179, 192, 192);
+	background-size: cover;
 	padding: 20px;
 `
 
 function Calendar() {
-	const [currentMonth, setCurrentMonth] = useState(new Date());
-	const [selectedDate, setSelectedDate] = useState(new Date());
-	const prevMonth = () => {
-		setCurrentMonth(subMonths(currentMonth, 1))
-	}
-	const nextMonth = () => {
-		setCurrentMonth(addMonths(currentMonth, 1))
-	}
-	const onDateClick = (day) => {
-		setSelectedDate(day)
-	}
 	return (
 		<Container>
-			<CalendarHead currentMonth={currentMonth} prevMonth={prevMonth} nextMonth={nextMonth} />
+			<CalendarHead />
 			<CalendarDays />
-			<CalenderBoard currentMonth={currentMonth} selectedDate={selectedDate} onDateClick={onDateClick}/>
+			<CalenderBoard />
 		</Container>
 	)
 }

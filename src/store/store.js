@@ -1,4 +1,5 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
+import { CalendarSlice, CalendarSelecteSlice } from "./CalendarSlice";
 
 const todoSlice = createSlice({
 	name: 'todos',
@@ -40,7 +41,9 @@ const store = configureStore({
 		todo: todoSlice.reducer,
 		isDelete: deleteSlice.reducer,
 		load: loadSlice.reducer,
-		isAdd: isAddSlice.reducer
+		isAdd: isAddSlice.reducer,
+		calendar: CalendarSlice.reducer,
+		selectedDate: CalendarSelecteSlice.reducer
 	}
 })
 export const {fill} = todoSlice.actions
