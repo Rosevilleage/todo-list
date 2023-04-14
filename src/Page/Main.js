@@ -12,9 +12,10 @@ const MainContainer = styled.main`
 	height: 100%;
 	flex-basis: 80%;
 	border-radius: 9px 6px 6px 9px;
-	background-image: linear-gradient( rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3) ), url(${image});
+	background-color: rgb(179, 192, 192);
 	background-size: cover;
 `
+// background-image: linear-gradient( rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3) ), url(${image});
 
 export default function Main() {
 	const todos = useSelector(state=>state.todo.value)
