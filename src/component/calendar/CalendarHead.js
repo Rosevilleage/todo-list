@@ -31,9 +31,9 @@ const ButtonContainer = styled.div`
 `
 
 export default function CalendarHead() {
-	const currentMonth = useSelector(state=>state.calendar.value)
+	const curM = useSelector((state)=>state.calendar.value);
+	const currentMonth = new Date(curM);
 	const dispatch = useDispatch()
-
 	return (
 		<HeaderContainer>
 			<YearMonth>

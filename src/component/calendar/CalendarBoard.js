@@ -44,8 +44,10 @@ const Week = styled.div`
 `
 
 export default function CalenderBoard() {
-	const currentMonth = useSelector((state)=>state.calendar.value);
-	const selectedDate = useSelector(state=>state.selectedDate.value);
+	const curM = useSelector((state)=>state.calendar.value);
+	const selD = useSelector(state=>state.selectedDate.value);
+	const currentMonth = new Date(curM)
+	const selectedDate = new Date(selD)
 	const dispatch = useDispatch();
 
 	const monthStart = startOfMonth(currentMonth);
@@ -73,7 +75,7 @@ export default function CalenderBoard() {
 						: 'vaild'
 					}
 					key={day}
-					onClick={()=>dispatch(Select(cloneDay))}
+					onClick={()=>dispatch(Select(cloneDay.toISOString()))}
 				>
 					<span
 						className={

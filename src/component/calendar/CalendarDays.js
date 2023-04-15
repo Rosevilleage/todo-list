@@ -20,7 +20,6 @@ export default function CalendarDays() {
 	const date = useMemo(()=>{
 		return ['Sun', 'Mon', 'Thu', 'Wed', 'Thrs', 'Fri', 'Sat'];
 	},[])
-	console.log(date)
 	return (
 		<Dayscontainer>
 			{date.map((e,i)=>{
