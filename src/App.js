@@ -1,35 +1,31 @@
-import './App.css';
-import Main from './Page/Main';
-import Header from './Page/Header';
-import styled from 'styled-components';
-import { dumyData } from './dumydata';
-import { useState } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Calendar from './Page/Calendar';
+import "./App.css";
+import Main from "./Page/Main";
+import Header from "./Page/Header";
+import styled from "styled-components";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Calendar from "./Page/Calendar";
+import { useSelector } from "react-redux";
 
 const TopContainer = styled.div`
-  width: 90%;
-  height: 90%;
-  border: 2px solid #7c8087;
-  border-radius: 10px;
-  overflow: hidden;
+  width: 100%;
+  height: 100%;
   display: flex;
-`
+  overflow: hidden;
+`;
 
 function App() {
-
+  const isModlaOpen = useSelector((state) => state.modal.value);
   return (
     <BrowserRouter>
       <div className="App">
         <TopContainer>
-          <Header/>
+          <Header />
           <Routes>
-            <Route path='/' element={<Main/>}/>
-            <Route path='/daily' element={<Main/>}/>
-            <Route path='/done' element={<Main/>}/>
-            <Route path='/calendar' element={<Calendar />}/>
+            <Route path="/" element={<Main />} />
+            <Route path="/daily" element={<Main />} />
+            <Route path="/done" element={<Main />} />
+            <Route path="/calendar" element={<Calendar />} />
           </Routes>
-          {/* <Main todos={todos} setTodos={setTodos}/> */}
         </TopContainer>
       </div>
     </BrowserRouter>

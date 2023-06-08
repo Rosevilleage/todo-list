@@ -2,6 +2,7 @@ import { useMemo } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import styled from "styled-components"
 import {deleteTrigger} from './../store/store'
+import { format } from "date-fns"
 
 const TodoHead = styled.div`
 	margin: 30px 40px 10px 40px;
@@ -43,6 +44,8 @@ const Delete= styled.button`
 
 export default function TodoHreader({pathname}) {
 	const isDelete = useSelector(state=>state.isDelete.value);
+	const curM = useSelector(state=>state.calendar.value)
+	const currentMonth = new Date(curM);
 	const dispatch = useDispatch()
 	let title = useMemo(()=>{
 		switch(pathname) {		
@@ -59,7 +62,7 @@ export default function TodoHreader({pathname}) {
 			<TodoHead>
 				<Title>
 					<span className="title">{title}</span>
-					<span className="date">Saturday, March 11th</span>
+					<span className="date">{`${format(currentMonth, 'EEEE')}, ${format(currentMonth, 'MMMM')} ${format(currentMonth, 'do')}`}</span>
 				</Title>
 				<Delete onClick={()=>dispatch(deleteTrigger(!isDelete))}>
 				<i class={isDelete?"fa-regular fa-star":"fa-regular fa-trash-can"}></i>
@@ -68,3 +71,4 @@ export default function TodoHreader({pathname}) {
 		</>
 	)
 }
+// EEEE,MMMMM,qo
