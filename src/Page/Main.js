@@ -28,7 +28,7 @@ export default function Main() {
       .get(location.pathname)
       .then((data) => dispatch(fill(data.data)))
       .catch((e) => console.error(e.message));
-  }, [location.pathname, load]);
+  }, [location.pathname, load, dispatch]);
 
   return (
     <MainContainer>

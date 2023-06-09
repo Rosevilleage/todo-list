@@ -33,16 +33,18 @@ function TodoInput() {
   useEffect(() => {
     inputRef.current.focus();
   }, []);
+
   const handleSubmit = () => {
     axios.post("/addTodo", {
       text: inputRef.current.value,
       daily: false,
       done: false,
-      date: new Date().toISOString(),
+      date: new Date().toISOString().slice(0, 10),
     });
     inputRef.current.value = "";
     dispatch(trigger());
   };
+
   return (
     <>
       <Input

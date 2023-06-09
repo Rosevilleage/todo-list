@@ -31,13 +31,22 @@ export const Container = styled.div`
   margin-bottom: 4px;
   background-color: rgba(255, 255, 255, 0.75);
   font-weight: 500;
+  > .date {
+    justify-self: end;
+    color: gray;
+    font-size: 12px;
+  }
+  > .is-done {
+    color: gray;
+    text-decoration: line-through;
+  }
 `;
 
 const Left = styled.div`
   display: flex;
   align-items: center;
   margin-left: 10px;
-  flex-basis: 90%;
+  flex-basis: 88%;
   > p {
     margin-left: 10px;
     text-align: left;
@@ -46,11 +55,6 @@ const Left = styled.div`
   > .is-done {
     color: gray;
     text-decoration: line-through;
-  }
-  > .date {
-    justify-self: end;
-    color: gray;
-    font-size: 12px;
   }
 `;
 
@@ -67,7 +71,7 @@ const DeleteBnt = styled.div`
   }
 `;
 
-const CheckBox = styled.input`
+export const CheckBox = styled.input`
   appearance: none;
   border: 1.5px solid rgb(95, 95, 95);
   border-radius: 50%;
@@ -96,10 +100,10 @@ export default function Todo({ data }) {
           onClick={() => post("done", data.id)}
         />
         <p className={data.done && "is-done"}>{data.text}</p>
-        <p className={`date ${data.done && "is-done"}`}>
-          {data.date.slice(0, 10)}
-        </p>
       </Left>
+      <p className={`date ${data.done && "is-done"}`}>
+        {data.date.slice(0, 10)}
+      </p>
       {!isDelete ? (
         <Right>
           <i

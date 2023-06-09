@@ -4,7 +4,6 @@ import Header from "./Page/Header";
 import styled from "styled-components";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Calendar from "./Page/Calendar";
-import { useSelector } from "react-redux";
 
 const TopContainer = styled.div`
   width: 100%;
@@ -14,7 +13,6 @@ const TopContainer = styled.div`
 `;
 
 function App() {
-  const isModlaOpen = useSelector((state) => state.modal.value);
   return (
     <BrowserRouter>
       <div className="App">
