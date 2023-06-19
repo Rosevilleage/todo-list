@@ -99,6 +99,9 @@ export default function CalenderBoard() {
     row.push(days);
     days = [];
   }
+
+  const hasTodo = (day) =>
+    todoDates.includes(addDays(day, 1).toISOString().slice(0, 10));
   return (
     <Body>
       {row.map((week, i) => (
@@ -116,7 +119,7 @@ export default function CalenderBoard() {
               }
               key={day}
               onClick={() => {
-                dispatch(modalToggle());
+                hasTodo(day) && dispatch(modalToggle());
                 dispatch(Select(addDays(day, 1).toISOString().slice(0, 10)));
               }}
             >
@@ -129,9 +132,7 @@ export default function CalenderBoard() {
               >
                 {format(day, "d")}
               </span>
-              {todoDates.includes(
-                addDays(day, 1).toISOString().slice(0, 10)
-              ) && <div className="has-todo" />}
+              {hasTodo(day) && <div className="has-todo" />}
             </Day>
           ))}
         </Week>

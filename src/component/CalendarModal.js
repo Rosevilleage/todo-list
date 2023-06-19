@@ -74,7 +74,7 @@ export default function CalendarModal() {
     <Background onClick={() => dispatch(modalToggle())}>
       <ModalContainer onClick={(e) => e.stopPropagation()}>
         <div className="top">
-          <button onClick={closeHandle}>x</button>
+          <button onClick={() => dispatch(modalToggle())}>x</button>
         </div>
         {todoItem.map((e) => (
           <TodoContainer key={e.id}>
